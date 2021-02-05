@@ -1,0 +1,14 @@
+#/usr/bin/env bash
+# clock
+i=0
+while [ "$i" -le 12 ];
+do
+j=0
+echo Hour: "$i"
+while [ "$j" -le 59 ];
+do
+echo "$j"
+let j+=1
+done
+let i+=1
+done
