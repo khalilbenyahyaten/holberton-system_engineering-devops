@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 # clock
 i=0
 while [ "$i" -le 12 ];
