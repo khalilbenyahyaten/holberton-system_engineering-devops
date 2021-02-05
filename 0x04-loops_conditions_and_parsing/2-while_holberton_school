@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# prints holberton school 10 times using while loop
+COUNTER=1
+while [ "$COUNTER" -le 10 ];
+do
+echo Holberton School
+let COUNTER+=1
+done
