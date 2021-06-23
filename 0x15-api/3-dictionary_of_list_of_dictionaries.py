@@ -1,22 +1,20 @@
 #!/usr/bin/python3
-"""dictionary of list of dictionaries"""
+"""
+dictionary of list of dictionaries
+"""
 import json
 import requests
 
-if __name__ == "__main__":
-    with open('todo_all_employees.json', mode='w') as employement:
-        employees = requests.get(
-            'https://jsonplaceholder.typicode.com/users/').json()
-        for employee in employees:
-            ids = employee.get('id')
-            todos = requests.get(
-                'https://jsonplaceholder.typicode.com/users/{}/todos'
-                .format(ids)).json()
-            tasks = []
-            json_file = {}
-            for task in todos:
-                tasks.append({"task": task.get("title"),
-                              "username": employee.get("username"),
-                              "completed": task.get("completed")})
-            json_file.update({ids: tasks})
-        json.dump(json_file, employement)
+
+if __name__ == '__main__':
+    filename = "todo_all_employees.json"
+    req = requests.get('https://jsonplaceholder.typicode.com/todos').json()
+    req_id = requests.get('https://jsonplaceholder.typicode.com/users/').json()
+    with open(filename, "w") as f:
+        d = {j.get("id"): [{'task': i.get('title'),
+             'completed': i.get('completed'),
+                            'username': j.get('username')} for i in req
+                           if j.get("id") == i.get('userId')]
+             for j in req_id}
+        json.dump(d, f)
+        
